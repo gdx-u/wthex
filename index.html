@@ -241,7 +241,9 @@
         }
 
         function dark_mode() {
-            document.documentElement.style.setProperty('--bg', getComputedStyle(document.body).getPropertyValue('--bg') == 'white' ? '#223' : 'white'); document.documentElement.style.setProperty('--text', getComputedStyle(document.body).getPropertyValue('--text') == 'black' ? '#dde' : 'black');
+            let white = getComputedStyle(document.body).getPropertyValue('--bg') == 'white';
+            localStorage.setItem("darkmode", white ? "true" : "false");
+            document.documentElement.style.setProperty('--bg', white ? '#223' : 'white'); document.documentElement.style.setProperty('--text', getComputedStyle(document.body).getPropertyValue('--text') == 'black' ? '#dde' : 'black');
         }
 
         load_color();
@@ -257,7 +259,7 @@
 
         const isDarkMode = () => 
   window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; // Absolutely stole this from https://ultimatecourses.com/blog/detecting-dark-mode-in-javascript
-        if (localStorage.getItem("darkmode") == "true" || isDarkMode()) {
+        if (localStorage.getItem("darkmode") != "false" || isDarkMode()) {
             dark_mode();
         }
     </script>
