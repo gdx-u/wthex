@@ -259,7 +259,7 @@
 
         const isDarkMode = () => 
   window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; // Absolutely stole this from https://ultimatecourses.com/blog/detecting-dark-mode-in-javascript
-        if (localStorage.getItem("darkmode") != "false" || isDarkMode()) {
+        if (localStorage.getItem("darkmode") == "true" || (localStorage.getItem("darkmode") == null && isDarkMode())) {
             dark_mode();
         }
     </script>
