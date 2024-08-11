@@ -103,7 +103,7 @@
     <p class="bg">by gdx : 
         <a href="https://yizzle.com/whatthehex/?n=5" target="_blank">original</a> : 
         <a href="#" onclick="window.open('', '_blank').document.write('What I changed from the original:<br>- Colors are guaranteed to be visibly different from each other (>10 shades away in each channel)<br>- Higher maximum difficulty<br>- Looks cooler 💪💪💪<br>- Mini mode (Press M)<br>- Score counter<br>- Made by a much cooler guy<br>')">changes</a> : 
-        <a href="#" onclick="document.documentElement.style.setProperty('--bg', getComputedStyle(document.body).getPropertyValue('--bg') == 'white' ? '#223' : 'white'); document.documentElement.style.setProperty('--text', getComputedStyle(document.body).getPropertyValue('--text') == 'black' ? '#dde' : 'black');">dark mode</a></p>
+        <a href="#" onclick="dark_mode();">dark mode</a></p>
     <div class="fullpage">
         <div class="container">
             <p id="title"></p>
@@ -237,6 +237,10 @@
             }
         }
 
+        function dark_mode() {
+            document.documentElement.style.setProperty('--bg', getComputedStyle(document.body).getPropertyValue('--bg') == 'white' ? '#223' : 'white'); document.documentElement.style.setProperty('--text', getComputedStyle(document.body).getPropertyValue('--text') == 'black' ? '#dde' : 'black');
+        }
+
         load_color();
 
         document.onkeydown = (e) => {
@@ -246,6 +250,12 @@
                 score = 0;
                 load_color();
             }
+        }
+
+        const isDarkMode = () => 
+  window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; // Absolutely stole this from https://ultimatecourses.com/blog/detecting-dark-mode-in-javascript
+        if (localStorage.getItem("darkmode") == "true" || isDarkMode()) {
+            dark_mode();
         }
     </script>
 </body>
